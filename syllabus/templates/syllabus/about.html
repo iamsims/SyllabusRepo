@@ -1,0 +1,12 @@
+{%extends "syllabus/base.html"%}
+{%block content%}
+      <div class="article-metadata">
+        <p>this section desrcibes syllabus repository.with pictures and link to login of the teacher side.</p>
+      </div>
+      {%if user.is_authenticated%}
+      
+      {%else%}
+      <a href="{% url 'syllabus-login' %}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Login as someone who can post syllabus</a>
+      {%endif%}
+
+{%endblock content%}

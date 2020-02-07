@@ -1,9 +1,10 @@
 from django.contrib import admin
-from .models import Subject,Syllabus,Faculty,YearandSem,Program
+#from .models import Faculty,Level,Program,Subject,Syllabus
 # Register your models here.
 
-admin.site.register(Subject)
-admin.site.register(Syllabus)
-admin.site.register(Faculty)
-admin.site.register(YearandSem)
-admin.site.register(Program)
+#so that this will show in admin page
+#admin.site.register(Subject)
+#admin.site.register(Faculty)
+#admin.site.register(Level)
+#admin.site.register(Syllabus)
+#admin.site.register(Program)

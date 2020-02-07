@@ -1,4 +1,7 @@
 {%extends "syllabus/base.html"%}
 {%block content%}
-<p>we'll make form here employee</p>
+<p>we'll make form here to access syllabus </p>
+{%if user.is_authenticated%}
+<a href="{% url 'add-syllabus' %}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Add syllabus</a>
+{%endif%}
 {%endblock content%}

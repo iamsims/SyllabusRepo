@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'syllabusRepo.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME':'Data',
+        'NAME':'Data_new',
         'USER':'postgres',
         'PASSWORD':'SIMRAN12345',
         'HOST':'localhost',
