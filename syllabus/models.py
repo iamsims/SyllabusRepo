@@ -4,9 +4,10 @@ from . import choices
 # Create your models here.
 
 class Level(models.Model):
+    Choices=[('11','I/I'),('12','I/II')]
     class Meta:
         verbose_name_plural='Levels'
-    title =models.CharField(max_length=50)
+    title =models.CharField(max_length=2,choices=Choices)
     
     def __str__(self):
         return self.title
@@ -20,21 +21,27 @@ class Faculty(models.Model):
     def __str__(self):
            return self.title
 
-
 class Program(models.Model):
+    Choices=[('BE','Bachelors'),('ME','Masters')]
     class Meta:
         verbose_name_plural='Programs'
-    title =models.CharField(max_length=50)
+    title =models.CharField(max_length=2,choices=Choices)
+    def __str__(self):
+        return self.title   
+
+class Specification(models.Model):
+    class Meta:
+        verbose_name_plural='Specifications'
+    program =models.ForeignKey(Program,on_delete=models.CASCADE)
     faculty=models.ForeignKey(Faculty,on_delete=models.CASCADE)
     level=models.ForeignKey(Level,on_delete=models.CASCADE)
     def __str__(self):
-        return self.title   
+        return (self.program.__str__() +self.faculty.__str__()+self.level.__str__())  
 
 
 class Subject(models.Model):
     class Meta:
         verbose_name_plural='Subject'
-    #Subject_code = models.CharField(max_length=25)
     subject_name = models.CharField(max_length=100)
     subject_type = models.CharField(choices = choices.SUBJECT_TYPE_CHOICES,max_length=20, default = 'COMPULSORY')#help_text='Compulsory')   #compulsory or elective
     lecture_hours = models.DecimalField(max_digits=2 ,decimal_places=1,null=True, blank=True)
@@ -57,11 +64,11 @@ class Subject(models.Model):
 class Syllabus(models.Model):
     class Meta:
         verbose_name_plural='Syllabus'
-    program=models.ForeignKey(Program,on_delete=models.CASCADE)
+    specification=models.ForeignKey(Specification,on_delete=models.CASCADE)
     Subject=models.ManyToManyField(Subject)
     total_final_marks = models.IntegerField()
 
     def __str__(self):
-        return (self.yearandsem.__str__() +self.program.__str__()+self.faculty.__str__())
+        return (self.specification.__str__())
     
 
