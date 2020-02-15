@@ -13,6 +13,9 @@
     {%for key in name%}
         <li>{{key}}</li>
     {%endfor%}
+    <a class="btn" href="{% url 'downloadpdf' %}" ><i class="fa fa-download"></i> Download</button>
+
+
 {%endif%} 
 
 {%if user.is_authenticated%}
