@@ -59,7 +59,7 @@ class Subject(models.Model):
     #Fculty.year, Program#because smae  b=subject in different programs , with different marks
 
     def __str__(self):
-        return self.title
+        return self.subject_name
 
 class Syllabus(models.Model):
     class Meta:
