@@ -8,7 +8,8 @@ from django.views.generic import (
 )
 from .forms import addForm,Choice
 from django.contrib.auth.decorators import login_required
-from .models import Faculty,Level,Program,Syllabus,Specification,Subject
+from .models import Faculty,Level,Program,Syllabus,Specification,Subject,Topic
+from django.http import Http404
 
 def getjson(fac,lev,pro):
     fac_id = Faculty.objects.all().filter(title=fac)[0].id
@@ -35,6 +36,8 @@ def home(request):
         e = Subject.objects.all().filter(syllabus__id=s_id)
         for s in e:
             dic={}
+            dic['id']=s.id
+            dic['code']=s.subject_code
             dic['name']=s.subject_name
             dic['type']=s.subject_type
             dic['hrs']=s.Total_no_of_hours
@@ -47,6 +50,19 @@ def home(request):
 
 def about(request):
     return render(request,'syllabus/about.html',{'title':'About'})
+
+
+def topics(request,pk):
+    try:
+        sub = Subject.objects.get(id=pk)
+        top = Topic.objects.all().filter(subject__id=pk)
+    except Subject.DoesNotExist:
+        raise Http404("Subject Does Not Exist")
+    context={
+        "subject":sub,
+        "topics":top
+    }
+    return render(request,"syllabus/topics.html",context)
 
 #this is detail view part 
 #class SyllabusView(DetailView):

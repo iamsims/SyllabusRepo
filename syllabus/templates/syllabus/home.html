@@ -45,7 +45,10 @@
         
     <tr>
 
-        <th width="15dp" id="code" style="font-weight: bold; font-size: 14px; text-align: center; padding-left: 3px; padding-right: 3px;border: 1px solid #ddd;font-family: Open Sans; color:#666666;"> Subject Name</th>
+        <th width="15dp" id="code" style="font-weight: bold; font-size: 14px; text-align: center; padding-left: 3px; padding-right: 3px;border: 1px solid #ddd;font-family: Open Sans; color:#666666;">Code
+        </th>
+        <th width="15dp" id="code" style="font-weight: bold; font-size: 14px; text-align: center; padding-left: 3px; padding-right: 3px;border: 1px solid #ddd;font-family: Open Sans; color:#666666;"> Subject Name
+        </th>
         <th width="25dp" style="font-weight: bold; font-size: 14px; text-align: center; padding-left: 3px; padding-right: 3px;border: 1px solid #ddd;font-family: Open Sans;color:#666666;">Type
         </th>
         <th width="15%" style="font-weight: bold; font-size: 14px; text-align: center;padding-left: 3px; padding-right: 3px;border: 1px solid #ddd;font-family: Open Sans;color:#666666;">Exam<br>Type
@@ -65,20 +68,21 @@
         
         <tbody>
             <tr>
-        
-                <td width="15dp" id="code" style="font-weight: bold; font-size: 14px; text-align: center; padding-left: 3px; padding-right: 3px;border: 1px solid #ddd;font-family: Open Sans; color:#666666;"> {{key.name}}
+                <td width="15dp" id="code" style=" font-size: 14px; text-align: center; padding-left: 3px; padding-right: 3px;border: 1px solid #ddd;font-family: Open Sans; color:#666666;"> {{key.code}}
                 </td>
-                <td width="25dp" style="font-weight: bold; font-size: 14px; text-align: center; padding-left: 3px; padding-right: 3px;border: 1px solid #ddd;font-family: Open Sans;color:#666666;">{{key.type}}
+               <td data-href=""width="15dp" id="code" style=" font-size: 14px; text-align: center; padding-left: 3px; padding-right: 3px;border: 1px solid #ddd;font-family: Open Sans; color:#666666;">  <a href=" {% url 'topics' key.id %}"> {{key.name}}</a>
                 </td>
-                <td width="10%" style="font-weight: bold; font-size: 14px; text-align: center;padding-left: 3px; padding-right: 3px;border: 1px solid #ddd;font-family: Open Sans;color:#666666;">{{key.extype}}
+                <td width="25dp" style=" font-size: 14px; text-align: center; padding-left: 3px; padding-right: 3px;border: 1px solid #ddd;font-family: Open Sans;color:#666666;">{{key.type}}
                 </td>
-                <td width="10%" style="font-weight: bold; font-size: 14px; text-align: center;padding-left: 3px; padding-right: 3px;border: 1px solid #ddd;font-family: Open Sans;color:#666666;"> {{key.hrs}}
+                <td width="10%" style="font-size: 14px; text-align: center;padding-left: 3px; padding-right: 3px;border: 1px solid #ddd;font-family: Open Sans;color:#666666;">{{key.extype}}
                 </td>
-                <td width="10%" style="font-weight: bold; font-size: 14px; text-align: center;padding-left: 3px; padding-right: 3px;border: 1px solid #ddd;font-family: Open Sans;color:#666666;">{{key.theory}}
+                <td width="10%" style=" font-size: 14px; text-align: center;padding-left: 3px; padding-right: 3px;border: 1px solid #ddd;font-family: Open Sans;color:#666666;"> {{key.hrs}}
                 </td>
-                <td width="10%" style="font-weight: bold; font-size: 14px; text-align: center;padding-left: 3px; padding-right: 3px;border: 1px solid #ddd;font-family: Open Sans;color:#666666;">{{key.prac}}
+                <td width="10%" style=" font-size: 14px; text-align: center;padding-left: 3px; padding-right: 3px;border: 1px solid #ddd;font-family: Open Sans;color:#666666;">{{key.theory}}
                 </td>
-                <td width="15%" style="font-weight: bold; font-size: 14px; text-align: center;padding-left: 3px; padding-right: 3px;border: 1px solid #ddd;font-family: Open Sans;color:#666666;">{{key.total}}
+                <td width="10%" style=" font-size: 14px; text-align: center;padding-left: 3px; padding-right: 3px;border: 1px solid #ddd;font-family: Open Sans;color:#666666;">{{key.prac}}
+                </td>
+                <td width="15%" style="font-size: 14px; text-align: center;padding-left: 3px; padding-right: 3px;border: 1px solid #ddd;font-family: Open Sans;color:#666666;">{{key.total}}
                 </td>
             </tr>
         </tbody>
@@ -91,5 +95,5 @@
 </div>
 <!-- {%if user.is_authenticated%}
 <a href="{% url 'add-syllabus' %}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Add syllabus</a>
-{%endif%}
-{%endblock content%} -->
+{%endif%}-->
+{%endblock content%} 

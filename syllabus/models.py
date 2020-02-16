@@ -48,6 +48,7 @@ class Topic(models.Model):
 class Subject(models.Model):
     class Meta:
         verbose_name_plural='Subject'
+    subject_code = models.CharField(max_length=25,null=True)
     subject_name = models.CharField(max_length=100)
     subject_type = models.CharField(choices = choices.SUBJECT_TYPE_CHOICES,max_length=20, default = 'COMPULSORY')#help_text='Compulsory')   #compulsory or elective
     lecture_hours = models.DecimalField(max_digits=2 ,decimal_places=1,null=True, blank=True)
