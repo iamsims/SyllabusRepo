@@ -3,19 +3,93 @@
 
 
 {%block content%}
-<p>we'll make form here to access syllabus </p>
-<form action="" method="POST" autocomplete="off">
-    {%csrf_token%}
-    {{form|crispy}}
-    <button type="submit" class="btn btn-success">Submit</button>
-</form>
- {%if check.condn %}
-    {%for key in name%}
-        <li>{{key}}</li>
-    {%endfor%}
-{%endif%} 
+<!-- <p>we'll make form here to access syllabus </p> -->
+ <div class ="nav-bar">  
+    <form action="" method="POST" autocomplete="off">
+        {%csrf_token%}
+        <div class ="row">
+            <div class ="col-md-3">
+                {{form.program|as_crispy_field}}
+            </div>
+            <div class ="col-md-3">
+                {{form.faculty|as_crispy_field}}
+            </div>
+            <div class ="col-md-3">
+                {{form.level|as_crispy_field}}
+            </div>
+            <div class="col-md-2 col-xs-2 col-sm-2 active" ; height: 100%;">
+                <label for="save btn btn-default" style="color:white">s</label><br>
+                <center style="height: 100%; ">
+                    <button type="submit" class="save btn btn-default" name= "process_btn" value="switching groups" style="border-radius:12px;cursor:pointer;color:#ffffff;background-color:#138cc4;border: none;font-size: 15px;width:150px; font-weight: bold; vertical-align: top;padding:8px;">DISPLAY</button>
+        <!-- 
+            <button id="btn-export" type="submit" class="save btn btn-default" name= "word_btn" value="switching groups" style="font-size: 15px; font-weight: bold; vertical-align: top; margin-top: 2% ;" onclick="PrintElem('a');">Export</button> -->
+                </center>
+            </div>
+            <!-- <div class ="col-md-1">
+            <form>
+                <label for="query" style="color:white">s</label><br>
+                <input type="text" id="query" name="qry" placeholder="Search.." ><br>
+            </form>  
+            </div> -->
+        </div>
+    </form>
+</div>
+<br>
+<br>
+<br>
+<div id ='a'>
+    {%if check.condn%}
+        <center><div>
+        <table border=1 class="top_table" style="border: 1px solid #ddd;border-collapse: collapse;margin-left:20px;">
+        <thead>
+        
+    <tr>
 
-{%if user.is_authenticated%}
+        <th width="15dp" id="code" style="font-weight: bold; font-size: 14px; text-align: center; padding-left: 3px; padding-right: 3px;border: 1px solid #ddd;font-family: Open Sans; color:#666666;"> Subject Name</th>
+        <th width="25dp" style="font-weight: bold; font-size: 14px; text-align: center; padding-left: 3px; padding-right: 3px;border: 1px solid #ddd;font-family: Open Sans;color:#666666;">Type
+        </th>
+        <th width="15%" style="font-weight: bold; font-size: 14px; text-align: center;padding-left: 3px; padding-right: 3px;border: 1px solid #ddd;font-family: Open Sans;color:#666666;">Exam<br>Type
+        </th>
+        <th width="10%" style="font-weight: bold; font-size: 14px; text-align: center;padding-left: 3px; padding-right: 3px;border: 1px solid #ddd;font-family: Open Sans;color:#666666;">Total <br/>Hours
+        </th>
+        <th width="10%" style="font-weight: bold; font-size: 14px; text-align: center;padding-left: 3px; padding-right: 3px;border: 1px solid #ddd;font-family: Open Sans;color:#666666;">Theory <br/> Total
+        </th>
+        <th width="10%" style="font-weight: bold; font-size: 14px; text-align: center;padding-left: 3px; padding-right: 3px;border: 1px solid #ddd;font-family: Open Sans;color:#666666;">Practical <br/> Total
+        </th>
+        <th width="10%" style="font-weight: bold; font-size: 14px; text-align: center;padding-left: 3px; padding-right: 3px;border: 1px solid #ddd;font-family: Open Sans;color:#666666;"> Total
+        </th>
+    </tr>
+        </thead>
+
+        {%for key in dic_list%}
+        
+        <tbody>
+            <tr>
+        
+                <td width="15dp" id="code" style="font-weight: bold; font-size: 14px; text-align: center; padding-left: 3px; padding-right: 3px;border: 1px solid #ddd;font-family: Open Sans; color:#666666;"> {{key.name}}
+                </td>
+                <td width="25dp" style="font-weight: bold; font-size: 14px; text-align: center; padding-left: 3px; padding-right: 3px;border: 1px solid #ddd;font-family: Open Sans;color:#666666;">{{key.type}}
+                </td>
+                <td width="10%" style="font-weight: bold; font-size: 14px; text-align: center;padding-left: 3px; padding-right: 3px;border: 1px solid #ddd;font-family: Open Sans;color:#666666;">{{key.extype}}
+                </td>
+                <td width="10%" style="font-weight: bold; font-size: 14px; text-align: center;padding-left: 3px; padding-right: 3px;border: 1px solid #ddd;font-family: Open Sans;color:#666666;"> {{key.hrs}}
+                </td>
+                <td width="10%" style="font-weight: bold; font-size: 14px; text-align: center;padding-left: 3px; padding-right: 3px;border: 1px solid #ddd;font-family: Open Sans;color:#666666;">{{key.theory}}
+                </td>
+                <td width="10%" style="font-weight: bold; font-size: 14px; text-align: center;padding-left: 3px; padding-right: 3px;border: 1px solid #ddd;font-family: Open Sans;color:#666666;">{{key.prac}}
+                </td>
+                <td width="15%" style="font-weight: bold; font-size: 14px; text-align: center;padding-left: 3px; padding-right: 3px;border: 1px solid #ddd;font-family: Open Sans;color:#666666;">{{key.total}}
+                </td>
+            </tr>
+        </tbody>
+        {%endfor%}
+     {%endif%}
+     </center>
+    </div>
+    </table>
+
+</div>
+<!-- {%if user.is_authenticated%}
 <a href="{% url 'add-syllabus' %}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Add syllabus</a>
 {%endif%}
-{%endblock content%}
+{%endblock content%} -->

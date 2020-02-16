@@ -39,6 +39,12 @@ class Specification(models.Model):
         return (self.program.__str__() +self.faculty.__str__()+self.level.__str__())  
 
 
+class Topic(models.Model):
+    title = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.title
+
 class Subject(models.Model):
     class Meta:
         verbose_name_plural='Subject'
@@ -56,6 +62,7 @@ class Subject(models.Model):
     theory_duration_hours = models.DecimalField(max_digits=2,decimal_places=1, null=True, blank=True)
     practical_duration_hours = models.DecimalField(max_digits=2,decimal_places=1, null=True, blank=True)
     exam_type = models.CharField(choices=choices.EXAM_TYPE_CHOICES,max_length=20, default='Theory')
+    topics = models.ManyToManyField(Topic)
     #Fculty.year, Program#because smae  b=subject in different programs , with different marks
 
     def __str__(self):
@@ -70,5 +77,6 @@ class Syllabus(models.Model):
 
     def __str__(self):
         return (self.specification.__str__())
+
     
 

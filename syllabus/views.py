@@ -19,7 +19,7 @@ def getjson(fac,lev,pro):
     return syllabus_id
 # Create your views here.
 def home(request):
-    name=[]
+    dic_list=[]
     check={'condn':0}
     if request.method == "GET":
         form = Choice()
@@ -34,8 +34,16 @@ def home(request):
         s_id = getjson(faculty,level,program)
         e = Subject.objects.all().filter(syllabus__id=s_id)
         for s in e:
-           name.append(s.subject_name)          
-        return render(request, 'syllabus/home.html',{'form':form,'check':check,'name':name})
+            dic={}
+            dic['name']=s.subject_name
+            dic['type']=s.subject_type
+            dic['hrs']=s.Total_no_of_hours
+            dic['prac']=s.practical_final_total
+            dic['theory']=s.theory_final_total
+            dic['total']=s.marks_final_total
+            dic['extype']=s.exam_type
+            dic_list.append(dic)          
+        return render(request, 'syllabus/home.html',{'form':form,'check':check,'dic_list':dic_list})
 
 def about(request):
     return render(request,'syllabus/about.html',{'title':'About'})
