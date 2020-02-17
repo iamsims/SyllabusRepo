@@ -32,21 +32,17 @@ def home(request):
             faculty = form.cleaned_data['faculty']
             level = form.cleaned_data['level']
             program = form.cleaned_data['program']
+
         s_id = getjson(faculty,level,program)
-        e = Subject.objects.all().filter(syllabus__id=s_id)
-        for s in e:
-            dic={}
-            dic['id']=s.id
-            dic['code']=s.subject_code
-            dic['name']=s.subject_name
-            dic['type']=s.subject_type
-            dic['hrs']=s.Total_no_of_hours
-            dic['prac']=s.practical_final_total
-            dic['theory']=s.theory_final_total
-            dic['total']=s.marks_final_total
-            dic['extype']=s.exam_type
-            dic_list.append(dic)          
-        return render(request, 'syllabus/home.html',{'form':form,'check':check,'dic_list':dic_list})
+        s = Syllabus.objects.get(id=s_id)
+        e = Subject.objects.all().filter(syllabus__id=s_id)  
+        context={
+            'form':form,
+            'check':check,
+            "subjects":e,
+            "syllabus":s
+        }      
+        return render(request, 'syllabus/home.html',context)
 
 def about(request):
     return render(request,'syllabus/about.html',{'title':'About'})
@@ -56,11 +52,13 @@ def topics(request,pk):
     try:
         sub = Subject.objects.get(id=pk)
         top = Topic.objects.all().filter(subject__id=pk)
+        syl = Syllabus.objects.filter(Subject__id=pk)
     except Subject.DoesNotExist:
         raise Http404("Subject Does Not Exist")
     context={
         "subject":sub,
-        "topics":top
+        "topics":top,
+        "bus":syl
     }
     return render(request,"syllabus/topics.html",context)
 

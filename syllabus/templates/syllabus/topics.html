@@ -1,11 +1,21 @@
 {%extends "syllabus/base.html"%}
 
 {%block content%}
-
+<br>
+<br>
 <h1>{{subject.subject_name}}</h1>
 
 {% for e in topics %}
 <li> {{e.title}} </li>
 {% endfor %}
+
+<br>
+<br>
+{%if bus %}
+    <h4> Departments that study {{subject.subject_name}}</h4>
+    {%for i in bus%}
+    <li>{{i.specification.program}} {{i.specification.faculty}} {{i.specification.level}}</li>
+    {% endfor %}
+{% endif %}
 
 {%endblock content%}
