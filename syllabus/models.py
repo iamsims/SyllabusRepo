@@ -37,13 +37,7 @@ class Specification(models.Model):
     level=models.ForeignKey(Level,on_delete=models.CASCADE)
     def __str__(self):
         return (self.program.__str__() +self.faculty.__str__()+self.level.__str__())  
-
-
-class Topic(models.Model):
-    title = models.CharField(max_length=100)
-
-    def __str__(self):
-        return self.title
+        
 
 class Subject(models.Model):
     class Meta:
@@ -51,19 +45,11 @@ class Subject(models.Model):
     subject_code = models.CharField(max_length=25,null=True)
     subject_name = models.CharField(max_length=100)
     subject_type = models.CharField(choices = choices.SUBJECT_TYPE_CHOICES,max_length=20, default = 'COMPULSORY')#help_text='Compulsory')   #compulsory or elective
-    lecture_hours = models.DecimalField(max_digits=2 ,decimal_places=1,null=True, blank=True)
-    tutorial_hours = models.DecimalField(max_digits=2,decimal_places=1,null=True, blank=True)
-    practical_hours = models.DecimalField(max_digits=2,decimal_places=1,null=True, blank=True)
     Total_no_of_hours = models.DecimalField(max_digits=2,decimal_places=1)
-    practical_assessment_total = models.IntegerField(null=True, blank=True)
     practical_final_total = models.IntegerField(null=True, blank=True)
-    theory_assessment_total = models.IntegerField(null=True, blank=True)
     theory_final_total = models.IntegerField(null=True, blank=True)
     marks_final_total = models.IntegerField(null=True, blank=True)
-    theory_duration_hours = models.DecimalField(max_digits=2,decimal_places=1, null=True, blank=True)
-    practical_duration_hours = models.DecimalField(max_digits=2,decimal_places=1, null=True, blank=True)
     exam_type = models.CharField(choices=choices.EXAM_TYPE_CHOICES,max_length=20, default='Theory')
-    topics = models.ManyToManyField(Topic)
     #Fculty.year, Program#because smae  b=subject in different programs , with different marks
 
     def __str__(self):

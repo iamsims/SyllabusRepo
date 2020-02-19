@@ -9,5 +9,8 @@ urlpatterns = [
     path('login/',auth_views.LoginView.as_view(template_name='syllabus/login.html'),name='syllabus-login'),
     path('logout/',auth_views.LogoutView.as_view(template_name='syllabus/logout.html'),name='syllabus-logout'),
     path('add/',views.add,name='add-syllabus'),#path when form is to be added
-    path('<int:pk>/',views.topics,name='topics')#this is to view full syllabus, make table
+    path('<int:pk>/',views.topics,name='topics'),#this is to view full syllabus, make table
+    path('addsub/',views.addsub,name='add-subject'),
+    path('addspec/',views.addspec,name='add-specs'),
+    # path('uploadpdf/',views.addsub,name='upload-pdf'),
 ]

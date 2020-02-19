@@ -128,12 +128,20 @@
             <tr><th id="total" colspan="7" style="font-size: 14px; text-align: center; padding : 3px;padding-left: 132px;border: 1px solid rgb(27, 25, 25);font-family: Open Sans;color:#666666;">Total Marks</th><td style="font-size: 14px; text-align: center;border: 1px solid rgb(27, 25, 25);font-family: Open Sans;color:#666666;">{{ syllabus.total_final_marks }}</td></tr>
         </tfoot>
      {%endif%}
-     </center>
-    </div>
     </table>
+</div>
+     </center>
+
 
 </div>
-<!-- {%if user.is_authenticated%}
-<a href="{% url 'add-syllabus' %}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Add syllabus</a>
-{%endif%}-->
+{%if user.is_authenticated%}
+<div class="fixed-bottom scale">
+    <div class="btn-group" role="group" aria-label="Basic example">
+        <a href="{% url 'add-syllabus' %}" class="btn btn-success">Add Syllabus</a>
+        <a href="{% url 'add-subject' %}" class="btn btn-success">Add Subject</a>
+        <a href="{% url 'add-specs' %}" class="btn btn-success">Add Department</a>
+        <a href="http://google.com" class="btn btn-success">Upload pdf</a>
+    </div}
+</div>
+{%endif%}
 {%endblock content%} 

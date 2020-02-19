@@ -4,12 +4,20 @@
 #first create for finding okay
 #not okay..i'll first make form for filling.
 from django import forms
-from .models import Syllabus,Specification
+from .models import Syllabus,Specification,Subject
+
+class Subjectform(forms.ModelForm):
+    class Meta:
+        model=Subject
+        fields='__all__'
 
 class addForm(forms.ModelForm):
     class Meta:
         model=Syllabus
         fields='__all__'
+    def __init__(self,*args,**kwargs):
+        super(addForm,self).__init__(*args,**kwargs)
+        self.fields['specification'].empty_label = "Select"
 
 class Choice(forms.ModelForm):
     class Meta:

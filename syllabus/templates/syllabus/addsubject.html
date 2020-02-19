@@ -1,0 +1,18 @@
+{%extends "syllabus/base.html"%}
+{%load crispy_forms_tags%}
+
+{%block content%}
+<br>
+<br>
+<br>
+{%if check.condn %}
+<div class="alert alert-success" role="alert">
+    Subject has been saved
+</div>
+{% endif %}
+<form action="" method="POST" autocomplete="off">
+    {%csrf_token%}
+    {{form|crispy}}
+    <button type="submit" class="btn btn-success">Add subject</button>
+</form>
+{%endblock content%}

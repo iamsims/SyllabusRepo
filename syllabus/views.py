@@ -6,9 +6,9 @@ from django.views.generic import (
     UpdateView,
     DeleteView
 )
-from .forms import addForm,Choice
+from .forms import addForm,Choice,Subjectform
 from django.contrib.auth.decorators import login_required
-from .models import Faculty,Level,Program,Syllabus,Specification,Subject,Topic
+from .models import Faculty,Level,Program,Syllabus,Specification,Subject
 from django.http import Http404
 
 def getjson(fac,lev,pro):
@@ -51,13 +51,11 @@ def about(request):
 def topics(request,pk):
     try:
         sub = Subject.objects.get(id=pk)
-        top = Topic.objects.all().filter(subject__id=pk)
         syl = Syllabus.objects.filter(Subject__id=pk)
     except Subject.DoesNotExist:
         raise Http404("Subject Does Not Exist")
     context={
         "subject":sub,
-        "topics":top,
         "bus":syl
     }
     return render(request,"syllabus/topics.html",context)
@@ -70,7 +68,34 @@ def topics(request,pk):
 
 @login_required    
 def add(request):
-    form=addForm()
-    return render(request,'syllabus/addform.html',{'form':form})
+    if request.method == "GET":
+        check={'condn':0}
+        form = addForm()
+    else:
+        form = addForm(request.POST)
+        check={'condn':1}
+        if form.is_valid():
+            form.save()
+    return render(request,'syllabus/addsyllabus.html',{'form':form,'check':check})
 
+def addsub(request):
+    if request.method == "GET":
+        check={'condn':0}
+        form = Subjectform()
+    else:
+        form = Subjectform(request.POST)
+        check={'condn':1}
+        if form.is_valid():
+            form.save()
+    return render(request,'syllabus/addsubject.html',{'form':form,'check':check})
 
+def addspec(request):
+    if request.method == "GET":
+        check={'condn':0}
+        form = Choice()
+    else:
+        form = Choice(request.POST)
+        check={'condn':1}
+        if form.is_valid():
+            form.save()
+    return render(request,'syllabus/addspecs.html',{'form':form,'check':check})
