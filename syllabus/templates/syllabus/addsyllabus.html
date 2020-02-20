@@ -11,10 +11,71 @@
     Syllabus has been saved
 </div>
 {% endif %}
-<form action="" method="POST" autocomplete="off">
-    {%csrf_token%}
-    {{form|crispy}}
-    <button type="submit" class="btn btn-success">Add syllabus</button>
-</form>
+
+<div class="modal fade" id="modalLoginForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Add / Edit Syllabus Syllabus</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div id="box">
+      <form action="" method="POST" autocomplete="off" id="form">
+        {%csrf_token%}
+        {{form|crispy}}
+        <div class="modal-footer d-flex justify-content-center">
+            <button type="submit" class="btn btn-default">Add/Edit</button>
+        </div>
+    </div>
+    </form>
+    </div>
+  </div>
+</div>
+
+<div class="text-center">
+  <a href="" class="btn btn-default btn-rounded mb-4" data-toggle="modal" data-target="#modalLoginForm">
+    Add/Edit Syllabus</a>
+</div>
+
+<table class="table borderless">
+    <thead class="border-bottom font-weight-bold">
+        <tr>
+            <td> Program </td>
+            <td> Department </td>
+            <td> Level </td>
+            <td> Subjects </td>
+            <td></td>
+        </tr>
+    </thead>
+    <tbody>
+        {%for syllabus in syllabus_list%}
+            <tr>
+                <td> {{ syllabus.specification.program }}</td>
+                <td> {{ syllabus.specification.faculty }} </td>
+                <td> {{ syllabus.specification.level }} </td>
+                <td>
+                    {% for s in syllabus.Subject.all %}
+                        {{ s.subject_name }} {% if forloop.last %} {% else %}, {% endif %}
+                    {% endfor %}
+                </td>
+                <td>
+                    <a href="{% url 'update' syllabus.id%}"  class="btn text-secondary px-0">
+                        <i class="far fa-edit fa-lg "></i>
+                        
+                    </a>
+                    <form action ="{% url 'delete' syllabus.id %}" method ="post" class = "d-inline">
+                        {% csrf_token %}
+                        <button class="submit btn">
+                            <i class="far fa-trash-alt fa-lg text-danger float-right">
+                            </i>
+                        </button>
+                    </form>
+            </tr>
+        {% endfor %}
+    </tbody>      
+</table>
 
 {%endblock content%}

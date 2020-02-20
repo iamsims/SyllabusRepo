@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'syllabus',
     'crispy_forms',
+    'fontawesome',
 ]
 
 MIDDLEWARE = [

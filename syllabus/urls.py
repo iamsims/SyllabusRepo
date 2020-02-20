@@ -13,4 +13,6 @@ urlpatterns = [
     path('addsub/',views.addsub,name='add-subject'),
     path('addspec/',views.addspec,name='add-specs'),
     # path('uploadpdf/',views.addsub,name='upload-pdf'),
+    path('edit/<int:pk>/',views.add,name='update'),
+    path('delete/<int:pk>/',views.delete,name='delete')
 ]

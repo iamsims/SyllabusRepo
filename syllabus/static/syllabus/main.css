@@ -98,3 +98,9 @@ body {
   .abc{
     float:right;
   }
+
+
+
+  #box form {
+    padding:30px;
+   }

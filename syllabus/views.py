@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import (
     ListView,
     DetailView,
@@ -67,16 +67,34 @@ def topics(request,pk):
 #class syllabusAddView(CreateView):
 
 @login_required    
-def add(request):
+def add(request, pk=0):
+    syllabus_list= Syllabus.objects.all()
+    subject_list_list =[]
+
+    for e in syllabus_list:
+        sub = Subject.objects.filter(syllabus__id = e.id)
+        subject_list_list.append(sub)
+    
+    is_popup=0
     if request.method == "GET":
         check={'condn':0}
-        form = addForm()
-    else:
-        form = addForm(request.POST)
+        if pk==0:
+            form = addForm()
+        else:
+            syllabus = Syllabus.objects.get(id=pk)
+            form = addForm(instance = syllabus)
+            is_popup=1;
+
+    else: 
         check={'condn':1}
+        if pk == 0:
+            form = addForm(request.POST)
+        else:
+            syllabus = Syllabus.objects.get(id = pk)
+            form = addForm(request.POST, instance=syllabus)
         if form.is_valid():
             form.save()
-    return render(request,'syllabus/addsyllabus.html',{'form':form,'check':check})
+    return render(request,'syllabus/addsyllabus.html',{'form':form,'check':check,'syllabus_list':syllabus_list})
 
 def addsub(request):
     if request.method == "GET":
@@ -99,3 +117,8 @@ def addspec(request):
         if form.is_valid():
             form.save()
     return render(request,'syllabus/addspecs.html',{'form':form,'check':check})
+
+def delete(request, pk):
+    syllabus = Syllabus.objects.get(id = pk)
+    syllabus.delete()
+    return redirect('/syllabus/add')
