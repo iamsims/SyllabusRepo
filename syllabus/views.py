@@ -48,17 +48,27 @@ def about(request):
     return render(request,'syllabus/about.html',{'title':'About'})
 
 
-def topics(request,pk):
+def topics(request,pk=0):
+    # if request.method == "GET":
     try:
         sub = Subject.objects.get(id=pk)
         syl = Syllabus.objects.filter(Subject__id=pk)
     except Subject.DoesNotExist:
         raise Http404("Subject Does Not Exist")
+
+    if request.method == "POST":
+        ufile=request.FILES['document']
+        print(ufile.name)
+        sub.pdf = ufile
+        sub.save()
+
     context={
         "subject":sub,
-        "bus":syl
+        "bus":syl,
     }
     return render(request,"syllabus/topics.html",context)
+    
+
 
 #this is detail view part 
 #class SyllabusView(DetailView):
@@ -122,3 +132,8 @@ def delete(request, pk):
     syllabus = Syllabus.objects.get(id = pk)
     syllabus.delete()
     return redirect('/syllabus/add')
+
+def pdfdelete(request, pk):
+    sub = Subject.objects.get(id = pk)
+    sub.pdf.delete()
+    return redirect('/syllabus/')

@@ -51,6 +51,7 @@ class Subject(models.Model):
     marks_final_total = models.IntegerField(null=True, blank=True)
     exam_type = models.CharField(choices=choices.EXAM_TYPE_CHOICES,max_length=20, default='Theory')
     #Fculty.year, Program#because smae  b=subject in different programs , with different marks
+    pdf = models.FileField(upload_to ="pdfs/" ,blank=True, null=True) 
 
     def __str__(self):
         return self.subject_name

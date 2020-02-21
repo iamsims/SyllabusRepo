@@ -1,3 +1,5 @@
+
+
 from django.contrib import admin
 from django.urls import path,include
 from . import views
@@ -14,5 +16,7 @@ urlpatterns = [
     path('addspec/',views.addspec,name='add-specs'),
     # path('uploadpdf/',views.addsub,name='upload-pdf'),
     path('edit/<int:pk>/',views.add,name='update'),
-    path('delete/<int:pk>/',views.delete,name='delete')
+    path('delete/<int:pk>/',views.delete,name='delete'),
+    path('deletepdf/<int:pk>/',views.pdfdelete,name='pdfdelete')
 ]
+

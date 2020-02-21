@@ -4,10 +4,39 @@
 <br>
 <br>
 <h1>{{subject.subject_name}}</h1>
+<br>
 
+{% if subject.pdf %}
+    <div class = "text-center">
+        <a href = "{{ subject.pdf.url }}" class="btn btn-primary btn-lg">Download </a>
+        <form action ="{% url 'pdfdelete' subject.id %}" method ="post" class = "d-inline">
+            {% csrf_token %}
+            <button class="submit btn">
+                <i class="far fa-trash-alt fa-lg text-danger float-right">
+                </i>
+            </button>
+        </form>
+    </div>
+{% else%}
+{% if user.is_authenticated %}
+<div class="text-center">
+    <form method ="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="file" name ="document">
+        <button type="submit"> Upload File </button>
+    </form>
+</div>
+<!-- <div class ="d-inline"> -->
+    
+<!-- </div> -->
+{% endif %}
+{% endif %}
 
 <br>
 <br>
+
+
+
 {%if bus %}
     <h4> Departments that study {{subject.subject_name}}</h4>
     {%for i in bus%}
